@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import {load} from 'cheerio';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import ProxyChecker, { ProxyCheckerStatus } from './utils/proxy-checker';
@@ -34,7 +34,7 @@ export async function getProxies(otps?: GetProxiesOptions): Promise<Proxy[]> {
   const html = await page.content();
   await browser.close();
 
-  const $ = cheerio.load(html, {});
+  const $ = load(html, {});
   $('script').remove();
 
   let proxies: Proxy[] = [];
